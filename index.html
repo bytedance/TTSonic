@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TTSonic Demo</title>
+    <meta
+      name="description"
+      content="TTSonic demo page with method overview, codec examples, and TTS generation examples."
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav">
+        <a class="brand" href="#top" aria-label="TTSonic home">TTSonic</a>
+        <div class="nav-links" aria-label="Page sections">
+          <a href="#abstract">Abstract</a>
+          <a href="#method">Method</a>
+          <a href="#codec">Codec Demo</a>
+          <a href="#tts">TTS Demo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero section">
+        <div class="hero-copy">
+          <p class="eyebrow">Technical Report Demo</p>
+          <h1>TTSonic</h1>
+          <p class="hero-subtitle">
+            A unified speech generation model that disentangles semantic and
+            prosodic speech tokens from speaker timbre embeddings.
+          </p>
+          <div class="hero-actions" aria-label="Quick links">
+            <a class="button primary" href="#tts">Listen to demos</a>
+            <a class="button secondary" href="#method">View method</a>
+          </div>
+        </div>
+        <div class="hero-panel" aria-label="Model capabilities">
+          <div class="metric">
+            <span class="metric-value">7</span>
+            <span class="metric-label">Composable capabilities</span>
+          </div>
+          <div class="capability-grid">
+            <span>Zero-shot TTS</span>
+            <span>Voice cloning</span>
+            <span>Controllable cloning</span>
+            <span>Prosody cloning</span>
+            <span>Voice conversion</span>
+            <span>Voice design</span>
+            <span>Speech<br />enhancement</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="abstract" class="section narrow">
+        <div class="section-heading">
+          <p class="eyebrow">Paper</p>
+          <h2>Abstract</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Modern text-to-speech (TTS) systems can synthesize natural and
+            expressive speech, yet a practical speech foundation model must go
+            beyond naturalness to offer stable quality, precise controllability,
+            and a broad set of composable capabilities within a single
+            framework.
+          </p>
+          <p>
+            We present TTSonic, a unified speech generation model that supports
+            zero-shot TTS, voice cloning, prosody cloning, controllable cloning,
+            text-guided voice design, and voice conversion within a single
+            framework. TTSonic couples a semantic speech tokenizer, a
+            text-to-semantic autoregressive language model, and an acoustic
+            flow-matching model.
+          </p>
+          <p>
+            The tokenizer is trained with ASR supervision and a late FSQ
+            bottleneck so that its discrete tokens preserve semantic and
+            prosodic information while being disentangled from speaker timbre;
+            the language model then performs semantic and prosodic planning from
+            text and optional natural-language instructions, and the
+            flow-matching model renders speech conditioned on either reference
+            audio or a text-described timbre.
+          </p>
+          <p>
+            Building on this design, we further improve robustness,
+            controllability, and voice diversity through RL post-training
+            tailored to TTS and instruction following, chain-of-thought-guided
+            style planning, and Text2Timbre voice design. Experiments show that
+            TTSonic achieves state-of-the-art or competitive TTS and
+            instruction-following performance with a compact 0.5B backbone, and
+            obtains further gains from model scaling and post-training.
+          </p>
+        </div>
+      </section>
+
+      <section id="method" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Architecture</p>
+          <h2>Method Overview</h2>
+        </div>
+        <figure class="figure-card">
+          <img
+            src="assets/figures/ttsonic-method-1.png"
+            alt="Overview of TTSonic, including the speech tokenizer, text-to-semantic speech LM, and acoustic flow-matching model."
+          />
+          <figcaption>
+            TTSonic consists of a speech tokenizer, a text-to-semantic speech
+            LM, and an acoustic flow-matching model. The system supports
+            reference-audio timbre conditioning and text-described timbre design.
+          </figcaption>
+        </figure>
+        <figure class="figure-card compact">
+          <img
+            src="assets/figures/codec-tokenizer-1.png"
+            alt="Training pipeline of the TTSonic speech tokenizer."
+          />
+          <figcaption>
+            The tokenizer is trained to preserve semantic and prosodic features
+            while reducing acoustic leakage from speaker timbre.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section id="codec" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Audio Codec</p>
+          <h2>Codec Demo</h2>
+          <p>
+            Codec tokens remove much of the original background information and
+            can be decoded by flow matching for enhancement and voice conversion.
+          </p>
+        </div>
+        <div class="tabs" data-tabs="codec">
+          <div class="tab-list" role="tablist" aria-label="Codec demo categories">
+            <button class="tab-button active" type="button" data-tab="speech-enhance">Speech Enhance</button>
+            <button class="tab-button" type="button" data-tab="voice-conversion">Voice Conversion</button>
+          </div>
+          <div class="tab-panel active" data-panel="speech-enhance">
+            <div id="codec-speech-enhance" class="demo-table"></div>
+          </div>
+          <div class="tab-panel" data-panel="voice-conversion">
+            <div id="codec-voice-conversion" class="demo-table"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tts" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Generation</p>
+          <h2>TTS Demo</h2>
+          <p>
+            TTSonic combines semantic/prosodic planning with independent timbre
+            control for cloning, prosody transfer, voice design, and instruction
+            following.
+          </p>
+        </div>
+        <div class="tabs" data-tabs="tts">
+          <div class="tab-list wrap" role="tablist" aria-label="TTS demo categories">
+            <button class="tab-button active" type="button" data-tab="instruct-following">Instruct Following</button>
+            <button class="tab-button" type="button" data-tab="timbre-generation">Timbre Generation</button>
+            <button class="tab-button" type="button" data-tab="controllable-cloning">Controlable Cloning</button>
+            <button class="tab-button" type="button" data-tab="speech-clone">Speech Clone</button>
+            <button class="tab-button" type="button" data-tab="prosody-clone">Prosody Clone</button>
+          </div>
+          <div class="tab-panel active" data-panel="instruct-following">
+            <div id="tts-instruct-following" class="demo-table"></div>
+          </div>
+          <div class="tab-panel" data-panel="timbre-generation">
+            <div id="tts-timbre-generation" class="demo-table"></div>
+          </div>
+          <div class="tab-panel" data-panel="controllable-cloning">
+            <div id="tts-controllable-cloning" class="demo-table"></div>
+          </div>
+          <div class="tab-panel" data-panel="speech-clone">
+            <div id="tts-speech-clone" class="demo-table"></div>
+          </div>
+          <div class="tab-panel" data-panel="prosody-clone">
+            <div id="tts-prosody-clone" class="demo-table"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>TTSonic Technical Report Demo</p>
+      <a href="#top">Back to top</a>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
