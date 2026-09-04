@@ -1,9 +1,37 @@
 const audioAssetVersion = "20260904-cc-s1-08-zh215";
 const audio = (src, label) => ({ src: `${src}?v=${audioAssetVersion}`, label });
 
-const codecVoiceConversion = [1, 3].map((n) => {
-  const id = `VC-${String(n).padStart(2, "0")}`;
-  const base = `assets/audio/codec/voice-conversion/vc-${String(n).padStart(2, "0")}`;
+const codecReconstruction = [
+  "1008233_p2_fed35af2",
+  "common_voice_zh-CN_19463832",
+  "1010161_0fa0e99f",
+  "1530",
+  "1017378_2b847e76",
+  "146",
+  "1893",
+  "769",
+].map((sourceId, index) => {
+  const id = `CR-${String(index + 1).padStart(2, "0")}`;
+  const base = `assets/audio/codec/reconstruction/cr-${String(index + 1).padStart(2, "0")}`;
+  return {
+    id,
+    source: audio(`${base}-source.wav`, "Source"),
+    reconstructed: audio(`${base}-reconstructed.wav`, "Codec Reconstruction"),
+  };
+});
+
+const codecVoiceConversion = [
+  ["1008233_p2_fed35af2", "00013265"],
+  ["common_voice_zh-CN_19463832", "00013265"],
+  ["1010161_0fa0e99f", "2582103295532887_022"],
+  ["1530", "2582103295532887_022"],
+  ["1017378_2b847e76", "7264970165866007863"],
+  ["146", "uttid_315"],
+  ["1893", "ZH_B00040_S01447_W000025"],
+  ["769", "ZH_B00040_S01447_W000025"],
+].map(([sourceId, targetId], index) => {
+  const id = `VC-${String(index + 1).padStart(2, "0")}`;
+  const base = `assets/audio/codec/voice-conversion/direct-vc-${String(index + 1).padStart(2, "0")}`;
   return {
     id,
     source: audio(`${base}-source.wav`, "Source"),
@@ -85,6 +113,14 @@ function renderAllTables() {
     ["Sample", "Source", "Target Timbre", "Converted"],
     codecVoiceConversion.map(
       (row) => `<tr><td class="sample-id">${row.id}</td><td>${renderAudio(row.source)}</td><td>${renderAudio(row.target)}</td><td>${renderAudio(row.converted)}</td></tr>`,
+    ),
+  );
+
+  renderTable(
+    "codec-reconstruction",
+    ["Sample", "Source", "Codec Reconstruction"],
+    codecReconstruction.map(
+      (row) => `<tr><td class="sample-id">${row.id}</td><td>${renderAudio(row.source)}</td><td>${renderAudio(row.reconstructed)}</td></tr>`,
     ),
   );
 
