@@ -6,7 +6,7 @@
     <title>TTSonic Demo</title>
     <meta
       name="description"
-      content="TTSonic demo page with method overview, codec examples, and TTS generation examples."
+      content="TTSonic technical report and speech generation scenario demos."
     />
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
@@ -17,8 +17,12 @@
         <div class="nav-links" aria-label="Page sections">
           <a href="#abstract">Abstract</a>
           <a href="#method">Method</a>
-          <a href="#codec">Codec Demo</a>
-          <a href="#tts">TTS Demo</a>
+          <a href="#codec-speech-enhancement">Speech Enhancement</a>
+          <a href="#codec-voice-conversion">Voice Conversion</a>
+          <a href="#cloning">Voice Cloning</a>
+          <a href="#prosody-cloning">Prosody Cloning</a>
+          <a href="#short-instruction-following">Instruction Following</a>
+          <a href="#long-instruction-following">Long-form Instruction Following</a>
         </div>
       </nav>
     </header>
@@ -33,22 +37,22 @@
             prosodic speech tokens from speaker timbre embeddings.
           </p>
           <div class="hero-actions" aria-label="Quick links">
-            <a class="button primary" href="#tts">Listen to demos</a>
+            <a class="button primary" href="#codec-speech-enhancement">Listen to demos</a>
             <a class="button secondary" href="#method">View method</a>
           </div>
         </div>
         <div class="hero-panel" aria-label="Model capabilities">
           <div class="metric">
             <span class="metric-value">6</span>
-            <span class="metric-label">Composable capabilities</span>
+            <span class="metric-label">Demo capabilities</span>
           </div>
           <div class="capability-grid">
-            <span>Zero-shot TTS</span>
-            <span>Voice cloning</span>
-            <span>Controllable cloning</span>
-            <span>Prosody cloning</span>
-            <span>Voice conversion</span>
-            <span>Voice design</span>
+            <a href="#codec-speech-enhancement">Speech Enhancement</a>
+            <a href="#codec-voice-conversion">Voice Conversion</a>
+            <a href="#cloning">Voice Cloning</a>
+            <a href="#prosody-cloning">Prosody Cloning</a>
+            <a href="#short-instruction-following">Instruction Following</a>
+            <a href="#long-instruction-following">Long-form Instruction Following</a>
           </div>
         </div>
       </section>
@@ -123,62 +127,87 @@
         </figure>
       </section>
 
-      <section id="codec" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Audio Codec</p>
-          <h2>Codec Demo</h2>
-          <p>
-            Codec tokens remove much of the original background information and
-            can be decoded by flow matching for reconstruction and voice conversion.
-          </p>
+      <section id="codec-speech-enhancement" class="section scene-section" lang="zh-CN">
+        <div class="section-heading task-heading">
+          <h2>Speech Enhancement</h2>
+          <p>Reconstruct clean, intelligible speech from codec tokens while filtering background noise, reverberation, and other acoustic degradations.</p>
         </div>
-        <div class="tabs" data-tabs="codec">
-          <div class="tab-list" role="tablist" aria-label="Codec demo categories">
-            <button class="tab-button active" type="button" data-tab="voice-conversion">Voice Conversion</button>
-            <button class="tab-button" type="button" data-tab="codec-reconstruction">Codec Reconstruction</button>
-          </div>
-          <div class="tab-panel active" data-panel="voice-conversion">
-            <div id="codec-voice-conversion" class="demo-table"></div>
-          </div>
-          <div class="tab-panel" data-panel="codec-reconstruction">
-            <div id="codec-reconstruction" class="demo-table"></div>
-          </div>
+        <div class="scene-card">
+          <div id="codec-speech-enhancement-table" class="demo-table codec-demo-table codec-two-column"></div>
         </div>
       </section>
 
-      <section id="tts" class="section">
-        <div class="section-heading">
-          <p class="eyebrow">Generation</p>
-          <h2>TTS Demo</h2>
-          <p>
-            TTSonic combines semantic/prosodic planning with independent timbre
-            control for cloning, prosody transfer, voice design, and instruction
-            following.
-          </p>
+      <section id="codec-voice-conversion" class="section scene-section">
+        <div class="section-heading task-heading">
+          <h2>Voice Conversion</h2>
+          <p>Transfer the target speaker's timbre while preserving the source speech content.</p>
         </div>
-        <div class="tabs" data-tabs="tts">
-          <div class="tab-list wrap" role="tablist" aria-label="TTS demo categories">
-            <button class="tab-button active" type="button" data-tab="instruct-following">Instruct Following</button>
-            <button class="tab-button" type="button" data-tab="timbre-generation">Timbre Generation</button>
-            <button class="tab-button" type="button" data-tab="controllable-cloning">Controlable Cloning</button>
-            <button class="tab-button" type="button" data-tab="speech-clone">Speech Clone</button>
-            <button class="tab-button" type="button" data-tab="prosody-clone">Prosody Clone</button>
+        <div class="scene-card">
+          <div id="codec-voice-conversion-table" class="demo-table codec-demo-table codec-three-column"></div>
+        </div>
+      </section>
+
+      <section id="cloning" class="section scene-section" lang="zh-CN">
+        <div class="section-heading task-heading">
+          <h2>Voice Cloning</h2>
+          <p>Generate new speech from a reference prompt and text while preserving the reference speaker's voice.</p>
+        </div>
+        <div class="scene-card">
+          <div id="cloning-table" class="demo-table cloning-demo-table"></div>
+        </div>
+      </section>
+
+      <section id="prosody-cloning" class="section scene-section" lang="zh-CN">
+        <div class="section-heading task-heading">
+          <h2>Prosody Cloning</h2>
+          <p>Clone the prosody of the Prompt audio and express it with the Target Voice timbre.</p>
+        </div>
+        <div class="scene-card">
+          <div id="prosody-cloning-table" class="demo-table cloning-demo-table"></div>
+        </div>
+      </section>
+
+      <section id="short-instruction-following" class="section scene-section" lang="zh-CN">
+        <div class="section-heading task-heading">
+          <h2>Instruction Following</h2>
+          <p>Follow natural-language instructions for speaker traits, speaking style, emotion, and prosody.</p>
+        </div>
+        <div class="scene-card">
+          <div id="short-instruction-following-table" class="demo-table instruction-demo-table"></div>
+        </div>
+      </section>
+
+      <section id="long-instruction-following" class="section scene-section" lang="zh-CN">
+        <div class="section-heading task-heading">
+          <h2>Long-form Instruction Following</h2>
+          <p>Maintain instruction adherence, speaker consistency, and expressive prosody throughout long-form narration.</p>
+          <p class="task-note">All texts and instructions used in this section were generated by a large language model.</p>
+          <div class="longform-overview" aria-label="Long-form demo coverage">
+            <span>2 Scenes</span>
+            <span>Long-form Audio</span>
+            <span>Segment-level Prosody</span>
           </div>
-          <div class="tab-panel active" data-panel="instruct-following">
-            <div id="tts-instruct-following" class="demo-table"></div>
-          </div>
-          <div class="tab-panel" data-panel="timbre-generation">
-            <div id="tts-timbre-generation" class="demo-table"></div>
-          </div>
-          <div class="tab-panel" data-panel="controllable-cloning">
-            <div id="tts-controllable-cloning" class="demo-table"></div>
-          </div>
-          <div class="tab-panel" data-panel="speech-clone">
-            <div id="tts-speech-clone" class="demo-table"></div>
-          </div>
-          <div class="tab-panel" data-panel="prosody-clone">
-            <div id="tts-prosody-clone" class="demo-table"></div>
-          </div>
+        </div>
+        <div class="audiobook-demo">
+          <div
+            id="audiobook-chapter-tabs"
+            class="audiobook-chapter-tabs"
+            role="tablist"
+            aria-label="Audiobook scenes"
+          ></div>
+          <div id="audiobook-chapter-panels"></div>
+        </div>
+      </section>
+
+      <section id="disclaimer" class="section disclaimer-section">
+        <div class="disclaimer-card">
+          <h2>Disclaimer</h2>
+          <p>
+            The content provided above is for academic purposes only and is
+            intended to demonstrate technical capabilities. Some examples are
+            sourced from the internet. If any content infringes on your rights,
+            please contact us to request its removal.
+          </p>
         </div>
       </section>
     </main>
@@ -188,6 +217,7 @@
       <a href="#top">Back to top</a>
     </footer>
 
+    <script src="assets/js/long-audiobook-data.js"></script>
     <script src="assets/js/main.js"></script>
   </body>
 </html>
