@@ -67,34 +67,38 @@
             Modern text-to-speech (TTS) systems can synthesize natural and
             expressive speech, yet a practical speech foundation model must go
             beyond naturalness to offer stable quality, precise controllability,
-            and a broad set of composable capabilities within a single
+            and a broad set of composable capabilities within a unified
             framework.
           </p>
           <p>
             We present TTSonic, a unified speech generation model that supports
-            zero-shot TTS, voice cloning, prosody cloning, controllable cloning,
-            text-guided voice design, and voice conversion within a single
-            framework. TTSonic couples a semantic speech tokenizer, a
-            text-to-semantic autoregressive language model, and an acoustic
-            flow-matching model.
+            zero-shot TTS, voice cloning, prosody cloning, instruction following,
+            voice conversion, and cloning from noisy reference speech. Rather
+            than relying on separate task-specific models, TTSonic accommodates
+            diverse conditioning signals, including text, natural-language
+            instructions, reference speech, and text-described timbre, within
+            the same model framework.
           </p>
           <p>
-            The tokenizer is trained with ASR supervision and a late FSQ
-            bottleneck so that its discrete tokens preserve semantic and
-            prosodic information while being disentangled from speaker timbre;
-            the language model then performs semantic and prosodic planning from
-            text and optional natural-language instructions, and the
-            flow-matching model renders speech conditioned on either reference
-            audio or a text-described timbre.
+            Specifically, we develop a semantic--acoustic disentangled speech
+            tokenizer through ASR-supervised semantic learning and
+            reconstruction-guided generative refinement. Serving as the
+            representational foundation of our unified framework, the tokenizer
+            enables the Text-to-Semantic autoregressive model to focus on
+            semantic and prosodic planning, while the acoustic flow-matching
+            model specializes in high-quality speech rendering under diverse
+            acoustic and timbre conditions.
           </p>
           <p>
-            Building on this design, we further improve robustness,
-            controllability, and voice diversity through RL post-training
-            tailored to TTS and instruction following, chain-of-thought-guided
-            style planning, and Text2Timbre voice design. Experiments show that
-            TTSonic achieves state-of-the-art or competitive TTS and
-            instruction-following performance with a compact 0.5B backbone, and
-            obtains further gains from model scaling and post-training.
+            Building on this framework, we incorporate CoT-guided
+            instruction-following planning and Text2Timbre voice design to
+            support controllable speech generation.
+          </p>
+          <p>
+            Experiments across zero-shot synthesis, multilingual and
+            cross-lingual TTS, instruction following, voice design, voice
+            conversion, and noisy-reference cloning demonstrate the competitive
+            performance and broad applicability of TTSonic.
           </p>
         </div>
       </section>
